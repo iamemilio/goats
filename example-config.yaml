@@ -1,0 +1,16 @@
+version: 1.0
+
+runs:
+  - name: example
+    kubeconfig: /Users/emiliogarcia/.kube/config
+    app:
+      image: "quay.io/emiliogarcia_1/example-app:latest"
+      environment-variables:
+        EXAMPLE_VARIABLE: example value
+    traffic-driver:
+      startup-delay: 10   # time in seconds the traffic driver waits to send traffic to the application
+      service-endpoint: /custom_events
+      traffic:
+        duration: 600   # time in seconds the traffic driver runs
+        requests-per-second: 500    # number of requests sent to the server per second
+        concurrent-requests: 2    # number of concurrent requests sent each time a request is sent
